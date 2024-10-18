@@ -41,7 +41,6 @@ This project is a 3-tier rule engine application designed to evaluate user eligi
 
 To install the necessary dependencies, run the following command:
 
-```bash
 pip install -r requirements.txt
 
 The main dependencies include:
