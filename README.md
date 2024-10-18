@@ -43,3 +43,105 @@ To install the necessary dependencies, run the following command:
 
 ```bash
 pip install -r requirements.txt
+
+The main dependencies include:
+
+Flask: Web framework for building the REST API.
+SQLAlchemy: ORM for interacting with the SQLite database.
+Regex: For validating rule strings.
+
+## Database Setup
+The project uses SQLite as the database to store rules and their ASTs. The database schema is automatically generated during the first run of the application.
+
+You can also initialize the database manually by running:
+python setup_database.py
+This will create the necessary tables in the SQLite database.
+
+## Running the Application Locally
+### 1.Clone the repository:
+git clone <repository_url>
+cd <project_directory>
+### 2. the dependencies:
+pip install -r requirements.txt
+### 3.Set up the database:
+python setup_database.py
+### 4.Start the Flask server:
+python main.py
+### 5.Access the API at http://localhost:5000.
+
+## API Documentation
+### Endpoints
+### 1.Create Rule
+POST /create_rule
+Accepts a rule string, converts it into an AST, and stores it in the database.
+Example Request:
+{
+  "rule": "((age > 30 AND department = 'Sales') OR (age < 25 AND department = 'Marketing')) AND (salary > 50000 OR experience > 5)"
+}
+Example Response:
+{
+  "message": "Rule created successfully",
+  "rule_id": 1
+}
+### 2.Combine Rules
+POST /combine_rules
+Combines multiple rules into a single AST.
+Example Request:
+{
+  "rules": ["rule1", "rule2"]
+}
+
+### 3.Evaluate Rule
+POST /evaluate_rule
+Evaluates a rule against a user's data.
+Example Request:
+{
+  "rule_id": 1,
+  "data": {
+    "age": 35,
+    "department": "Sales",
+    "salary": 60000,
+    "experience": 3
+  }
+}
+
+### 4.Modify Rule
+PUT /modify_rule
+Allows modification of an existing rule's AST.
+
+### 5.Get All Rules
+GET /rules
+Fetches all stored rules along with their AST representations.
+
+## Error Handling
+The system has comprehensive error handling for:
+
+Invalid rule strings (e.g., missing operators, invalid comparisons).
+Invalid JSON data formats.
+Rule modification errors.
+
+## Running Tests
+You can run the test cases to verify the functionality of the rule engine
+python test_rule_engine.py
+The tests include:
+Validation of AST creation for individual rules.
+Rule combination testing.
+Rule evaluation with various user datasets.
+Error handling tests for invalid rule strings and data.
+
+## Build Instructions
+To build and run the project:
+
+Ensure you have Python 3.x installed.
+Clone the repository and navigate to the project directory.
+Install dependencies using pip install -r requirements.txt.
+Set up the database using python setup_database.py.
+Run the Flask server using python main.py.
+(Optional) Use Docker to containerize and run the application.
+
+## Docker Setup
+The application is fully containerized using Docker. The Docker setup includes the following services:
+
+Flask API: Exposes the REST endpoints.
+SQLite Database: Stores the rules and their ASTs.
+
