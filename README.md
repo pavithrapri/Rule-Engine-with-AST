@@ -66,7 +66,7 @@ pip install -r requirements.txt
 python setup_database.py
 ### 4.Start the Flask server:
 python main.py
-### 5.Access the API at http://localhost:5000.
+### 5.Access the API 
 
 ## API Documentation
 ### Endpoints
